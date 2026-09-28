@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Activity 3</title>
+    <link rel="icon" type="image/x-icon" href= "Logo_last.png" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <style>
+        body {
+            /* background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); */
+            min-height: 100vh;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        .main-container {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 30px;
+            margin: 20px auto;
+            /* max-width: 1000px; */
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+        
+        .activity-title {
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-size: 2.5rem;
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        
+        .subject-badge {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            padding: 8px 20px;
+            border-radius: 25px;
+            display: inline-block;
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 30px;
+        }
+        
+        .question-card {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 25px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+            border-left: 5px solid #4ecdc4;
+            transition: all 0.3s ease;
+        }
+        
+        .question-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+        }
+        
+        .question-number {
+            background: linear-gradient(45deg, #ff6b6b, #ff8e8e);
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.2rem;
+            margin-right: 15px;
+        }
+        
+        .question-text {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 20px;
+            line-height: 1.5;
+        }
+        
+        .answer-btn {
+            background: linear-gradient(45deg, #4ecdc4, #44a08d);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 25px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(78, 205, 196, 0.3);
+        }
+        
+        .answer-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(78, 205, 196, 0.4);
+            background: linear-gradient(45deg, #44a08d, #4ecdc4);
+        }
+        
+        .hide-btn {
+            background: linear-gradient(45deg, #ff6b6b, #ff5252);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 25px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(255, 107, 107, 0.3);
+        }
+        
+        .hide-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(255, 107, 107, 0.4);
+            background: linear-gradient(45deg, #ff5252, #ff6b6b);
+        }
+        
+        .answer-content {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            padding: 25px;
+            border-radius: 15px;
+            margin-top: 20px;
+            border-left: 4px solid #4ecdc4;
+            font-size: 1.1rem;
+            line-height: 1.6;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .answer-title {
+            color: #2c3e50;
+            font-weight: bold;
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+        }
+        
+        .state-section {
+            background: rgba(255, 255, 255, 0.8);
+            padding: 15px;
+            border-radius: 10px;
+            margin: 15px 0;
+            border-left: 3px solid #ff6b6b;
+        }
+        
+        .state-title {
+            color: #ff6b6b;
+            font-weight: bold;
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+        }
+        
+        .examples {
+            background: rgba(78, 205, 196, 0.1);
+            padding: 10px;
+            border-radius: 8px;
+            margin-top: 10px;
+            font-style: italic;
+            color: #2c3e50;
+        }
+        
+        .instructions-section {
+            background: linear-gradient(135deg, #EEEEEE 0%, #E8E8E8 100%);
+            padding: 25px;
+            border-radius: 15px;
+            margin-top: 40px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .instructions-title {
+            text-align: center;
+            color: #2c3e50;
+            font-size: 2rem;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+        
+        .instructions-list {
+            font-size: 1.2rem;
+            color: #34495e;
+            line-height: 1.8;
+        }
+        
+        .instructions-list li {
+            margin-bottom: 12px;
+            padding-left: 10px;
+        }
+        
+        .instructions-list a {
+            color: #3498db;
+            font-weight: bold;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        
+        .instructions-list a:hover {
+            color: #2980b9;
+        }
+    </style>
+</head>
+<body>
+    <div class="header" style="width:100%; box-shadow:5px 5px 10px rgb(0, 0, 0); padding-bottom:10px;">
+        <img src="Logo.png" width="5%" style="float:left; margin-top:22px;" class="img-responsive">
+        <span><img src="header.png" width="30%" height="auto" class="img-responsive"></span>
+    </div>
+
+    <div class="container">
+        <div class="main-container">
+
+            <div class="instructions-section" style="margin-bottom: 2%;">
+                <h3 class="instructions-title">📋 Instructions</h3>
+                <ol class="instructions-list">
+                  <li> Read the question and discuss your answer with the teacher</li>
+<li>After discussion, click on Show Answer and note it down on your notebook</li>
+                </ol>
+            </div>
+            
+            <h1 class="activity-title">Short Answer Questions</h1>
+            <!-- <div class="text-center">
+                <span class="subject-badge">MATTER & ATOMIC STRUCTURE</span>
+            </div> -->
+
+<div class="question-card">
+    <div class="d-flex align-items-start">
+        <span class="question-number">Q1</span>
+        <div class="flex-grow-1">
+            <div class="question-text">
+                If chlorine atom is available in the form of two isotopes:
+
+<br><img src="./10.png" width="40%" alt="">
+<br>Calculate the average atomic mass of the bromine atom.
+
+            </div>
+            <button class="answer-btn" onclick="toggleAnswer('answer1', this)">
+                🔍 Show Answer
+            </button>
+            <div id="answer1" class="answer-content" style="display: none;">
+               <p>
+             The average atomic mass of chlorine is calculated using the weighted average of its isotopes:
+<br>
+<br>Average atomic mass =
+<br>(35 x 75/100) + (37 x 25/100)
+<br>= (105/4) + (37/4)
+<br>= 142/4
+<br>= 35.5 u
+<br>
+<br>So, the average atomic mass of chlorine is approximately 35.5 u.
+
+               </p>
+               
+            </div>
+        </div>
+    </div>
+</div>
+
+<br><h1 class="activity-title">Long Answer Questions</h1>
+
+<div class="question-card">
+    <div class="d-flex align-items-start">
+        <span class="question-number">Q2</span>
+        <div class="flex-grow-1">
+            <div class="question-text">
+             For each of the following atoms and ions, determine the number of protons, neutrons and electrons:
+            <ol type="1">
+                <li>Oxygen ion (O<sup>2–</sup>):
+                    <br>Number of protons = _____________
+                    <br>Number of neutrons = ___________
+                    <br>Number of electrons = ___________
+
+                </li>
+                <li> Chlorine ion (Cl<sup>–</sup>):
+                    <br>Number of protons = _____________
+                    <br>Number of neutrons = ___________
+                    <br>Number of electrons = ___________
+
+                </li>
+                <li>Sodium ion (Na<sup>+</sup>):
+                    <br>Number of protons = _____________
+                    <br>Number of neutrons = ___________
+                    <br>Number of electrons = ___________
+
+                </li>
+                <li>Magnesium ion (Mg<sup>2+</sup>):
+                    <br>Number of protons = _____________
+                    <br>Number of neutrons = ___________
+                    <br>Number of electrons = ___________
+
+                </li>
+                
+                <li>Aluminium ion (Al<sup>3+</sup>):
+                    <br>Number of protons = _____________
+                    <br>Number of neutrons = ___________
+                    <br>Number of electrons = ___________
+
+                </li>
+            </ol>
+        </div>
+       
+
+            <button class="answer-btn" onclick="toggleAnswer('answer2', this)">
+                🔍 Show Answer
+            </button>
+            <div id="answer2" class="answer-content" style="display: none;">
+            <ol type="1">
+                <li>Oxygen ion (O<sup>2–</sup>):
+                    <br>Number of protons = 8
+                    <br>Number of neutrons = 8
+                    <br>Number of electrons = 10 
+
+                </li>
+                <li>Chlorine ion (Cl<sup>–</sup>):
+                    <br>Number of protons = 17
+                    <br>Number of neutrons = 18
+                    <br>Number of electrons = 18
+
+                </li>
+                <li>Sodium ion (Na<sup>+</sup>):
+                    <br>Number of protons = 11
+                    <br>Number of neutrons = 12
+                    <br>Number of electrons = 10
+
+                </li>
+                <li>Magnesium ion (Mg<sup>2+</sup>):
+                    <br>Number of protons = 12
+                    <br>Number of neutrons = 12
+                    <br>Number of electrons = 10
+
+                </li>
+                
+                <li>Aluminium ion (Al<sup>3+</sup>):
+                    <br>Number of protons = 13
+                    <br>Number of neutrons = 14
+                    <br>Number of electrons = 10
+
+                </li>
+            </ol>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+           
+        </div>
+    </div>
+
+    <script>
+        function toggleAnswer(answerId, button) {
+            const answerDiv = document.getElementById(answerId);
+            
+            if (answerDiv.style.display === 'none') {
+                answerDiv.style.display = 'block';
+                button.innerHTML = '🙈 Hide Answer';
+                button.className = 'hide-btn';
+            } else {
+                answerDiv.style.display = 'none';
+                button.innerHTML = '🔍 Show Answer';
+                button.className = 'answer-btn';
+            }
+        }
+    </script>
+</body>
+</html>
